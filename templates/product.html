@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+{% load filters_and_tags %}
+
+{% block title %}Телефон{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="header">
+            <h1>Телефон: {{product.name}}</h1>
+        </div>
+
+        <div class="content">
+
+            <h2>Стоимость: {{product.price}}р.</h2>
+            <h3>Дата релиза: {{product.release_date}}</h3>
+            <h6>В наличии: {{product.lte_exists|exist}}</h6>
+            <img src="{{product.image}}" style="margin-bottom:40px">
+        </div>
+    </div>
+{% endblock %}
