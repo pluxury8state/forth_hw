@@ -19,20 +19,20 @@ from django.urls import path, register_converter
 import phones.views
 
 
-class StrConvertor:
-    regex = '.+'
-
-    def to_python(self, string: str):
-        return string
-
-    def to_url(self, value: str):
-        value = value.replace(' ','-')
-        return value
-
-register_converter(StrConvertor, 'slg')
+# class StrConvertor:
+#     regex = '.+'
+#
+#     def to_python(self, string: str):
+#         return string
+#
+#     def to_url(self, value: str):
+#         value = value.replace(' ','-')
+#         return value
+#
+# register_converter(StrConvertor, 'slg')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('catalog/', phones.views.show_catalog),
-    path('catalog/<slg:slug>/', phones.views.show_product),
+    path('catalog/<slug>/', phones.views.show_product),
 ]

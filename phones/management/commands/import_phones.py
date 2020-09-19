@@ -1,7 +1,8 @@
 import csv
-
+import re
 from django.core.management.base import BaseCommand
 from phones.models import Phone
+from datetime import datetime
 
 
 class Command(BaseCommand):
@@ -13,12 +14,14 @@ class Command(BaseCommand):
 
         with open('phones.csv', 'r', encoding='utf-8') as file:
             phones = list(csv.DictReader(file, delimiter=';'))
+            regex = re.compile('(\d{4})-(\d{2})-(\d{2})')
 
             for items in phones:
                 name = items['name']
                 image = items['image']
                 price = float(items['price'])
-                release_date = (items['release_date'])
+                date = regex.findall(items['release_date'])
+                release_date = datetime(int(date[0][0]), int(date[0][1]), int(date[0][2]))
                 lte_exists = bool(items['lte_exists'])
                 Phone.objects.create(name=name, image=image, price=price, release_date=release_date, lte_exists=lte_exists)
 

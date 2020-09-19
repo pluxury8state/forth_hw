@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from pprint import pprint
+
+from django.template.defaultfilters import slugify
+
 from .models import Phone
 from .management.commands.import_phones import Command
 
@@ -47,9 +50,9 @@ def show_catalog(request):
 
 def show_product(request, slug: str):
     print(slug)
-
+    slug = str(slugify(slug))
+    slug = slug.replace('-', ' ')
     template = 'product.html'
-    # slug = slug.replace('-', ' ')
     context = {
         'product': Phone.objects.filter(name__icontains=slug).first()
     }
