@@ -51,9 +51,9 @@ def show_catalog(request):
 def show_product(request, slug: str):
     print(slug)
     slug = str(slugify(slug))
-    slug = slug.replace('-', ' ')
+
     template = 'product.html'
     context = {
-        'product': Phone.objects.filter(name__icontains=slug).first()
+        'product': Phone.objects.filter(slug=slug).first()
     }
     return render(request, template, context)

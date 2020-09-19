@@ -1,6 +1,8 @@
 import csv
 import re
 from django.core.management.base import BaseCommand
+from django.template.defaultfilters import slugify
+
 from phones.models import Phone
 from datetime import datetime
 
@@ -22,8 +24,10 @@ class Command(BaseCommand):
                 price = float(items['price'])
                 date = regex.findall(items['release_date'])
                 release_date = datetime(int(date[0][0]), int(date[0][1]), int(date[0][2]))
+                slug = slugify(name)
                 lte_exists = bool(items['lte_exists'])
-                Phone.objects.create(name=name, image=image, price=price, release_date=release_date, lte_exists=lte_exists)
+                Phone.objects.create(name=name, image=image, price=price, release_date=release_date,
+                                     lte_exists=lte_exists, slug=slug)
 
 
 
