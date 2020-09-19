@@ -50,7 +50,7 @@ def show_catalog(request):
 
 def show_product(request, slug: str):
     print(slug)
-    slug = str(slugify(slug))
+    # slug = str(slugify(slug))
 
     template = 'product.html'
     context = {

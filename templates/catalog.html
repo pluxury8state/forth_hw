@@ -21,7 +21,7 @@
         <div class="content">
 
             {% for items in phones %}
-                <h1><a href="/catalog/{{items.name}}">{{items.name}}</a></h1>
+                <h1><a href="/catalog/{{items.slug}}">{{items.name}}</a></h1>
                 <h2>Стоимость: {{items.price}}р.</h2>
                 <img src="{{items.image}}" style="margin-bottom:40px">
             {% endfor %}
